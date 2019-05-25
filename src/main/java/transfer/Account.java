@@ -2,6 +2,7 @@ package transfer;
 
 public class Account {
     private Integer accountNumber;
+
     private Money balance;
 
     Account(Integer accountNumber, Money balance) {
@@ -9,8 +10,8 @@ public class Account {
         this.balance = balance;
     }
 
-    Account(Integer accountNumber) {
-        this(accountNumber, new Money());
+    public Integer getAccountNumber() {
+        return accountNumber;
     }
 
     void withdraw(Money amountToWithdraw) {
