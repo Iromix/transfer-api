@@ -1,6 +1,6 @@
-package transfer;
+package transfer.domain;
 
-import transfer.dto.MoneyDto;
+import transfer.domain.dto.MoneyDto;
 
 import static org.apache.commons.lang.Validate.notNull;
 
@@ -8,20 +8,20 @@ public class TransferService {
 
     private final AccountRepository accountRepository;
 
-    TransferService(AccountRepository accountRepository) {
+    public TransferService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
-    public void transfer(Integer accoutFrom, Integer accountTo, MoneyDto moneyDto) {
-        System.out.println("transfer account " + accoutFrom + " account to " + accountTo);
+    public void transfer(Integer accountFrom, Integer accountTo, MoneyDto moneyDto) {
+        System.out.println("transfer account " + accountFrom + " account to " + accountTo);
         transfer(
-                accountRepository.load(accoutFrom),
+                accountRepository.load(accountFrom),
                 accountRepository.load(accountTo),
                 new Money(moneyDto.getAmount(), moneyDto.getCurrencyCode())
         );
     }
 
-    void transfer(Account from, Account destination, Money amount) {
+    private void transfer(Account from, Account destination, Money amount) {
         notNull(from);
         notNull(destination);
 

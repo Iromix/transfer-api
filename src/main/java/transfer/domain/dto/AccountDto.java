@@ -1,4 +1,4 @@
-package transfer.dto;
+package transfer.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package transfer;
+package transfer.domain;
 
 import java.math.BigDecimal;
 import java.util.Currency;

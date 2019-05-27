@@ -1,7 +1,5 @@
-package transfer;
+package transfer.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -30,8 +28,4 @@ public class InMemoryAccountRepository implements AccountRepository{
         return account;
     }
 
-    @Override
-    public List<Account> fetchAllAccounts() {
-        return new ArrayList<>(map.values());
-    }
 }

@@ -1,8 +1,10 @@
-package transfer
+package transfer.domain
 
 import spock.lang.Specification
-import transfer.dto.AccountDto
-import transfer.dto.MoneyDto
+import transfer.configuration.AccountConfiguration
+import transfer.domain.AccountService
+import transfer.domain.dto.AccountDto
+import transfer.domain.dto.MoneyDto
 
 class AccountServiceSpec extends Specification {
 

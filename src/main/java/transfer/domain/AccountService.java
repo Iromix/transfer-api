@@ -1,13 +1,13 @@
-package transfer;
+package transfer.domain;
 
-import transfer.dto.AccountDto;
-import transfer.dto.MoneyDto;
+import transfer.domain.dto.AccountDto;
+import transfer.domain.dto.MoneyDto;
 
 public class AccountService {
 
     private final AccountRepository accountRepository;
 
-    AccountService(AccountRepository accountRepository) {
+    public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 

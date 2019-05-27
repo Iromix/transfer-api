@@ -1,6 +1,8 @@
-package transfer
+package transfer.domain
 
 import spock.lang.Specification
+import transfer.domain.Account
+import transfer.domain.Money
 
 class AccountSpec extends Specification {
 

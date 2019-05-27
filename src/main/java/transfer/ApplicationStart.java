@@ -1,6 +1,8 @@
+package transfer;
+
 import io.javalin.Javalin;
-import transfer.AccountController;
-import transfer.TransferController;
+import transfer.web.AccountController;
+import transfer.web.TransferController;
 
 public class ApplicationStart {
 

@@ -1,7 +1,9 @@
-package transfer;
+package transfer.web;
 
 import io.javalin.Handler;
-import transfer.dto.MoneyDto;
+import transfer.configuration.TransferConfiguration;
+import transfer.domain.TransferService;
+import transfer.domain.dto.MoneyDto;
 
 import java.util.Objects;
 

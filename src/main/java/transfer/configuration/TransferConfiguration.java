@@ -1,4 +1,6 @@
-package transfer;
+package transfer.configuration;
+
+import transfer.domain.TransferService;
 
 public class TransferConfiguration {
 

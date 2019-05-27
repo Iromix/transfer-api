@@ -1,6 +1,10 @@
-package transfer
+package transfer.domain
 
 import spock.lang.Specification
+import transfer.domain.Account
+import transfer.domain.AccountRepository
+import transfer.domain.InMemoryAccountRepository
+import transfer.domain.Money
 
 class InMemoryAccountRepositorySpec extends Specification {
 

@@ -1,8 +1,8 @@
-package transfer;
+package transfer.domain;
 
 import java.util.Objects;
 
-public class Account {
+class Account {
 
     private final Integer accountNumber;
     private Money balance;
