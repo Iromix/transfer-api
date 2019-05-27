@@ -21,9 +21,14 @@ public class AccountService {
         accountRepository.save(account);
     }
 
+    public void withdraw(Integer accountNumber, MoneyDto moneyDto) {
+        Account account = accountRepository.load(accountNumber);
+        account.withdraw(new Money(moneyDto.getAmount(), moneyDto.getCurrencyCode()));
+        accountRepository.save(account);
+    }
+
     public AccountDto getAccount(Integer accountNumber) {
         return createAccountDto(accountRepository.load(accountNumber));
-
     }
 
     private AccountDto createAccountDto(Account account) {
@@ -33,5 +38,4 @@ public class AccountService {
     private MoneyDto createMoneyDto(Money money) {
         return new MoneyDto(money.getValue(), money.getCurrencyCode());
     }
-
 }

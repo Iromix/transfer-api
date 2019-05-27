@@ -46,6 +46,15 @@ public class ApplicationStart {
             ctx.status(201);
         });
 
+        app.post("/account/:number/withdraw", ctx -> {
+            Integer accountNumber = Integer.parseInt(Objects.requireNonNull(ctx.pathParam("number")));
+            MoneyDto moneyDto = ctx.bodyAsClass(MoneyDto.class);
+
+            accountService.withdraw(accountNumber, moneyDto);
+
+            ctx.status(201);
+        });
+
         app.get("/account/:number", ctx -> {
             Integer accountNumber = Integer.parseInt(Objects.requireNonNull(ctx.pathParam("number")));
 
