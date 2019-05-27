@@ -1,14 +1,4 @@
-import groovyx.net.http.RESTClient
-import spock.lang.Specification
-
-class ApiSpec extends Specification {
-
-    //todo make integration spec
-    RESTClient client = new RESTClient('http://localhost:7000')
-
-    def setupSpec() {
-        ApplicationStart.startServer()
-    }
+class ApiSpec extends IntegrationSpec {
 
     def "create accounts"() {
         given:
@@ -60,9 +50,5 @@ class ApiSpec extends Specification {
 
         then:
         transferReponse.status == 201
-    }
-
-    def cleanupSpec() {
-        ApplicationStart.stopServer()
     }
 }

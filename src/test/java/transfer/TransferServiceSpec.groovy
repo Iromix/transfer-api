@@ -14,13 +14,13 @@ class TransferServiceSpec extends Specification {
         given: "two accounts - source account with 20 EUR, destination account with 0 EUR"
         Account fromAccount = new Account(1234, new Money(20.0))
         Account destinationAccount = new Account(111, Money.ZERO)
-        Money transferedAmount = new Money(20.0, Money.DEFAULT_CURRENCY)
+        Money transferredAmount = new Money(20.0, Money.DEFAULT_CURRENCY)
 
         when:
-        transferService.transfer(fromAccount, destinationAccount, transferedAmount)
+        transferService.transfer(fromAccount, destinationAccount, transferredAmount)
 
         then:
         fromAccount.getBalance() == Money.ZERO
-        destinationAccount.getBalance() == transferedAmount
+        destinationAccount.getBalance() == transferredAmount
     }
 }

@@ -6,7 +6,7 @@ import static org.apache.commons.lang.Validate.notNull;
 
 public class TransferService {
 
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     TransferService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;

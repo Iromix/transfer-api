@@ -1,27 +1,16 @@
 package transfer.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
+@AllArgsConstructor
 public class MoneyDto implements Serializable {
     private double amount;
     private String currencyCode;
 
-    public MoneyDto() {
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public String getCurrencyCode() {
-        return currencyCode;
-    }
-
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
+    private MoneyDto() {
     }
 }

@@ -30,8 +30,14 @@ public class Money {
     }
 
     private Money(BigDecimal value, String currencyCode) {
+        if (!currencyCodeIsAvailable(currencyCode))
+            throw new IllegalArgumentException("Currency mismatch");
         this.value = value;
         this.currencyCode = currencyCode;
+    }
+
+    private boolean currencyCodeIsAvailable(String currencyCode) {
+        return Currency.getAvailableCurrencies().contains(Currency.getInstance(currencyCode));
     }
 
     double getValue() {
@@ -77,8 +83,8 @@ public class Money {
         return currencyCode;
     }
 
-    boolean greaterThan(Money other) {
-        return value.compareTo(other.value) > 0;
+    boolean greaterThanZero() {
+        return value.compareTo(Money.ZERO.value) > 0;
     }
 
     boolean lessThan(Money other) {

@@ -4,8 +4,7 @@ import java.util.Objects;
 
 public class Account {
 
-    private Integer accountNumber;
-
+    private final Integer accountNumber;
     private Money balance;
 
     Account(Integer accountNumber, Money balance) {
@@ -24,17 +23,13 @@ public class Account {
     }
 
     void deposit(Money amountToDeposit) {
-        if (!amountToDeposit.greaterThan(Money.ZERO))
+        if (!amountToDeposit.greaterThanZero())
             throw new IllegalArgumentException("Can deposit only positive amount");
         balance = balance.add(amountToDeposit);
     }
 
     public Money getBalance() {
         return balance;
-    }
-
-    public String getCurrencyCode() {
-        return balance.getCurrencyCode();
     }
 
     @Override

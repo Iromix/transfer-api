@@ -28,10 +28,7 @@ class AccountServiceSpec extends Specification {
     def "deposit money on account"() {
         given:
         String currencyCode = "PLN"
-        //todo make some builder
-        MoneyDto moneyToDeposit = new MoneyDto()
-        moneyToDeposit.setCurrencyCode(currencyCode)
-        moneyToDeposit.setAmount(20.0)
+        MoneyDto moneyToDeposit = new MoneyDto(20.0, currencyCode)
         Integer accountNumber = accountService.createAccount(currencyCode).getAccountNumber()
 
         when:
