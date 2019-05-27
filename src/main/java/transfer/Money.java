@@ -13,8 +13,12 @@ public class Money {
 
     private final String currencyCode;
 
-    Money() {
-        this(BigDecimal.ZERO, Money.DEFAULT_CURRENCY);
+    Money(String currencyCode) {
+        this(BigDecimal.ZERO, currencyCode);
+    }
+
+    Money(double value, String currencyCode) {
+        this(new BigDecimal(value), currencyCode);
     }
 
     Money(BigDecimal value, Currency currency) {
@@ -28,6 +32,10 @@ public class Money {
     private Money(BigDecimal value, String currencyCode) {
         this.value = value;
         this.currencyCode = currencyCode;
+    }
+
+    double getValue() {
+        return value.doubleValue();
     }
 
     @Override
@@ -65,7 +73,7 @@ public class Money {
         return BigDecimal.ZERO.compareTo(testedValue) == 0;
     }
 
-    private String getCurrencyCode() {
+    String getCurrencyCode() {
         return currencyCode;
     }
 
