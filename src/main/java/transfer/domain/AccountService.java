@@ -1,7 +1,10 @@
 package transfer.domain;
 
+import io.javalin.NotFoundResponse;
 import transfer.domain.dto.AccountDto;
 import transfer.domain.dto.MoneyDto;
+
+import static org.apache.commons.lang.Validate.notNull;
 
 public class AccountService {
 
@@ -28,7 +31,8 @@ public class AccountService {
     }
 
     public AccountDto getAccount(Integer accountNumber) {
-        return createAccountDto(accountRepository.load(accountNumber));
+        Account account = accountRepository.load(accountNumber);
+        return createAccountDto(account);
     }
 
     private AccountDto createAccountDto(Account account) {

@@ -17,7 +17,7 @@ class AccountSpec extends Specification {
         account.withdraw(new Money(20.0, PLN))
 
         then:
-        thrown IllegalArgumentException
+        thrown TransferException
     }
 
     def "should deposit money on account"() {

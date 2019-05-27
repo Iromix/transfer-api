@@ -34,6 +34,6 @@ class MoneySpec extends Specification {
         new Money(2.10, USD).subtract(new Money(1.10, PLN))
 
         then:
-        thrown IllegalArgumentException
+        thrown CurrencyMismatchException
     }
 }

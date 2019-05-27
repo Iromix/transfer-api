@@ -1,5 +1,6 @@
 package transfer.domain;
 
+import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,6 +19,8 @@ public class InMemoryAccountRepository implements AccountRepository{
 
     @Override
     public Account load(Integer accountNumber) {
+        if (!map.containsKey(accountNumber))
+            throw new NoSuchElementException("There is no account with this number");
         return map.get(accountNumber);
     }
 

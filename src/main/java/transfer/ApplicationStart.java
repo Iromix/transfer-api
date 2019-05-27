@@ -1,8 +1,12 @@
 package transfer;
 
 import io.javalin.Javalin;
+import transfer.domain.CurrencyMismatchException;
+import transfer.domain.TransferException;
 import transfer.web.AccountController;
 import transfer.web.TransferController;
+
+import java.util.NoSuchElementException;
 
 public class ApplicationStart {
 
@@ -20,6 +24,17 @@ public class ApplicationStart {
         app.post("/account/:number/deposit", AccountController.depositMoney);
         app.post("/account/:number/withdraw", AccountController.withdrawMoney);
         app.get("/account/:number", AccountController.getAccount);
+
+        app.exception(NoSuchElementException.class, (e, ctx) -> {
+            ctx.status(404);
+            ctx.result(e.getMessage());
+        }).exception(TransferException.class, (e, ctx) -> {
+            ctx.status(400);
+            ctx.result(e.getMessage());
+        }).exception(CurrencyMismatchException.class, (e, ctx) -> {
+            ctx.status(500);
+            ctx.result(e.getMessage());
+        });
     }
 
     public static void stopServer() {

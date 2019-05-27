@@ -30,14 +30,18 @@ public class Money {
     }
 
     private Money(BigDecimal value, String currencyCode) {
-        if (!currencyCodeIsAvailable(currencyCode))
-            throw new IllegalArgumentException("Currency mismatch");
+        validateCurrencyCodeIsAvailable(currencyCode);
+
         this.value = value;
         this.currencyCode = currencyCode;
     }
 
-    private boolean currencyCodeIsAvailable(String currencyCode) {
-        return Currency.getAvailableCurrencies().contains(Currency.getInstance(currencyCode));
+    private void validateCurrencyCodeIsAvailable(String currencyCode) {
+        try {
+            Currency.getInstance(currencyCode);
+        } catch (IllegalArgumentException e) {
+            throw new CurrencyMismatchException("Unavailable currency code");
+        }
     }
 
     double getValue() {
@@ -55,14 +59,14 @@ public class Money {
 
     public Money subtract(Money money) {
         if (incompatibleCurrency(money))
-            throw new IllegalArgumentException("Currency mismatch");
+            throw new CurrencyMismatchException("Currency mismatch");
 
         return new Money(value.subtract(money.value), money.getCurrencyCode());
     }
 
     public Money add(Money money) {
         if (incompatibleCurrency(money))
-            throw new IllegalArgumentException("Currency mismatch");
+            throw new CurrencyMismatchException("Currency mismatch");
 
         return new Money(value.add(money.value), money.getCurrencyCode());
     }

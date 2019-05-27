@@ -18,13 +18,13 @@ class Account {
 
     void withdraw(Money amountToWithdraw) {
         if (balance.lessThan(amountToWithdraw))
-            throw new IllegalArgumentException("Cannot withdraw more money that it is available on account");
+            throw new TransferException("Cannot withdraw more money that it is available on account");
         balance = balance.subtract(amountToWithdraw);
     }
 
     void deposit(Money amountToDeposit) {
         if (!amountToDeposit.greaterThanZero())
-            throw new IllegalArgumentException("Can deposit only positive amount");
+            throw new TransferException("Can deposit only positive amount");
         balance = balance.add(amountToDeposit);
     }
 
