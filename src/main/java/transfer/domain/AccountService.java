@@ -1,10 +1,7 @@
 package transfer.domain;
 
-import io.javalin.NotFoundResponse;
 import transfer.domain.dto.AccountDto;
 import transfer.domain.dto.MoneyDto;
-
-import static org.apache.commons.lang.Validate.notNull;
 
 public class AccountService {
 
