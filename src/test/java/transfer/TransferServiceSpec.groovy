@@ -2,7 +2,7 @@ package transfer
 
 import spock.lang.Specification
 
-class TransferMoneySpec extends Specification {
+class TransferServiceSpec extends Specification {
 
     TransferService transferService
 

@@ -14,10 +14,10 @@ class InMemoryAccountRepositorySpec extends Specification {
         Account account = new Account(1, new Money(10.0))
         when:
         accountRepository.save(account)
-        Account loadedAccount = accountRepository.load(account)
+        Account loadedAccount = accountRepository.load(account.getAccountNumber())
 
         then:
-        account.getAccountNumber() == loadedAccount.getAccountNumber()
+        account == loadedAccount
     }
 
 }
