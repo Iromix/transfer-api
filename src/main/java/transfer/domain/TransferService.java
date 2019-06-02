@@ -12,8 +12,7 @@ public class TransferService {
         this.accountRepository = accountRepository;
     }
 
-    public void transfer(Integer accountFrom, Integer accountTo, MoneyDto moneyDto) {
-        System.out.println("transfer account " + accountFrom + " account to " + accountTo);
+    public synchronized void transfer(Integer accountFrom, Integer accountTo, MoneyDto moneyDto) {
         transfer(
                 accountRepository.load(accountFrom),
                 accountRepository.load(accountTo),

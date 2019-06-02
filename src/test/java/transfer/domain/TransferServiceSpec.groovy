@@ -1,30 +1,33 @@
 package transfer.domain
 
 import spock.lang.Specification
+import transfer.configuration.AccountConfiguration
 import transfer.configuration.TransferConfiguration
 import transfer.domain.Account
 import transfer.domain.Money
 import transfer.domain.TransferService
+import transfer.domain.dto.MoneyDto
 
 class TransferServiceSpec extends Specification {
 
     TransferService transferService
+    AccountService accountService
 
     def setup() {
         transferService = new TransferConfiguration().transferService()
+        accountService = new AccountConfiguration().accountService()
     }
 
-    def "transfer money between two accounts"() {
-        given: "two accounts - source account with 20 EUR, destination account with 0 EUR"
-        Account fromAccount = new Account(1234, new Money(20.0))
-        Account destinationAccount = new Account(111, Money.ZERO)
-        Money transferredAmount = new Money(20.0, Money.DEFAULT_CURRENCY)
+    def "should fail to transfer money to not existing account"() {
+        given: "only one account created"
+        Account fromAccount = accountService.createAccount("EUR")
+        Integer notExistingAccountNumber = 666
+        MoneyDto moneyToTransfer = new MoneyDto(20.0, "EUR")
 
         when:
-        transferService.transfer(fromAccount, destinationAccount, transferredAmount)
+        transferService.transfer(fromAccount.getAccountNumber(), notExistingAccountNumber, moneyToTransfer)
 
-        then:
-        fromAccount.getBalance() == Money.ZERO
-        destinationAccount.getBalance() == transferredAmount
+        then: "raise exception"
+        thrown NoSuchElementException
     }
 }
