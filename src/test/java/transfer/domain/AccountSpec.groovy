@@ -30,4 +30,24 @@ class AccountSpec extends Specification {
         then:
         account.getBalance() == new Money(20.0, PLN)
     }
+
+    def "should fail to deposit negative amount of money"() {
+        given:
+        Account account = new Account(111, new Money(0.0, PLN))
+
+        when:
+        account.deposit(new Money(-10.0, PLN))
+
+        then:
+        thrown TransferException
+    }
+
+    def "test equals method"() {
+        given:
+        Account account1 = new Account(1, new Money(0.0, PLN))
+        Account account2 = new Account(2, new Money(0.0, PLN))
+
+        expect:
+        account1 != account2
+    }
 }

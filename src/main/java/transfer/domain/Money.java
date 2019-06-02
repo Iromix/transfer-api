@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Money {
 
-    public static final Currency DEFAULT_CURRENCY = Currency.getInstance("EUR");
+    static final Currency DEFAULT_CURRENCY = Currency.getInstance("EUR");
     static final Money ZERO = new Money(BigDecimal.ZERO);
 
     private final BigDecimal value;

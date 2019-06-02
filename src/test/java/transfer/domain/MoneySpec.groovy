@@ -1,7 +1,6 @@
 package transfer.domain
 
 import spock.lang.Specification
-import transfer.domain.Money
 
 class MoneySpec extends Specification {
 
@@ -32,6 +31,22 @@ class MoneySpec extends Specification {
     def "should fail subtract money with different currencies"() {
         when:
         new Money(2.10, USD).subtract(new Money(1.10, PLN))
+
+        then:
+        thrown CurrencyMismatchException
+    }
+
+    def "should fail add money with different currencies"() {
+        when:
+        new Money(2.10, USD).add(new Money(1.10, PLN))
+
+        then:
+        thrown CurrencyMismatchException
+    }
+
+    def "should fail to create money with not available money"() {
+        when:
+        new Money(2.10, "XXXXXXX")
 
         then:
         thrown CurrencyMismatchException
