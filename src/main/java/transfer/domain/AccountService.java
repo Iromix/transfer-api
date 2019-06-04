@@ -11,8 +11,9 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public Account createAccount(String currencyCode) {
-        return accountRepository.create(currencyCode);
+    public AccountDto createAccount(String currencyCode) {
+        Account account = accountRepository.create(currencyCode);
+        return createAccountDto(account);
     }
 
     public synchronized void deposit(Integer accountNumber, MoneyDto moneyDto) {

@@ -23,8 +23,8 @@ class TransferInMultiThreadedEnvironmentSpec extends Specification {
     def "simulate transfers between two accounts invoked by multiple systems"() {
 
         given: "two accounts with EUR currencies"
-        Account fromAccount = accountService.createAccount("EUR")
-        Account destinationAccount = accountService.createAccount("EUR")
+        AccountDto fromAccount = accountService.createAccount("EUR")
+        AccountDto destinationAccount = accountService.createAccount("EUR")
 
         and: "source account has deposited money to transfer"
         double totalAmountToTransfer = 10_000
@@ -40,13 +40,14 @@ class TransferInMultiThreadedEnvironmentSpec extends Specification {
 
     def makeTransfersByMultipleSystems(fromAccount, destinationAccount, double totalAmountToTransfer, double oneTransferAmount) {
         ExecutorService executorService = Executors.newFixedThreadPool(20)
+        MoneyDto moneyToTransfer = new MoneyDto(oneTransferAmount, "EUR")
         for (int i = 0; i < totalAmountToTransfer / oneTransferAmount; i++) {
             executorService.execute({
                 try {
                     transferService.transfer(
                             fromAccount.getAccountNumber(),
                             destinationAccount.getAccountNumber(),
-                            new MoneyDto(oneTransferAmount, "EUR")
+                            moneyToTransfer
                     )
                 } catch (InterruptedException e) {
                     e.printStackTrace()

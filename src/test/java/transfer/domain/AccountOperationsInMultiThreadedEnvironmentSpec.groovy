@@ -20,7 +20,7 @@ class AccountOperationsInMultiThreadedEnvironmentSpec extends Specification {
     def "simulate deposits on account invoked by multiple systems"() {
 
         given: "account with deposited money"
-        Account account = accountService.createAccount("EUR")
+        AccountDto account = accountService.createAccount("EUR")
         double totalAmountToTransfer = 10_000
         accountService.deposit(
                 account.getAccountNumber(),
@@ -28,27 +28,27 @@ class AccountOperationsInMultiThreadedEnvironmentSpec extends Specification {
         )
 
         when: "make many deposits and withdraws by multiple threads/systems"
-        makeDepositsAndWithdrawsByMultipleSystems(account, totalAmountToTransfer, 10.0)
+        makeDepositsAndWithdrawsByMultipleSystems(account.getAccountNumber(), totalAmountToTransfer, 10.0)
 
         then: "account balance is still the same"
         AccountDto resultAccount = accountService.getAccount(account.getAccountNumber())
         resultAccount.getMoneyDto().amount == totalAmountToTransfer
     }
 
-    def makeDepositsAndWithdrawsByMultipleSystems(Account account, double totalAmountToTransfer, double oneTransferAmount) {
+    def makeDepositsAndWithdrawsByMultipleSystems(Integer accountNumber, double totalAmountToTransfer, double oneTransferAmount) {
         ExecutorService executorService = Executors.newFixedThreadPool(20)
         MoneyDto money = new MoneyDto(oneTransferAmount, "EUR")
         for (int i = 0; i < totalAmountToTransfer / oneTransferAmount; i++) {
             executorService.execute({
                 try {
-                    accountService.deposit(account.getAccountNumber(), money)
+                    accountService.deposit(accountNumber, money)
                 } catch (InterruptedException e) {
                     e.printStackTrace()
                 }
             })
             executorService.execute({
                 try {
-                    accountService.withdraw(account.getAccountNumber(), money)
+                    accountService.withdraw(accountNumber, money)
                 } catch (InterruptedException e) {
                     e.printStackTrace()
                 }

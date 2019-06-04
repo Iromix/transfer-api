@@ -6,6 +6,7 @@ import transfer.configuration.TransferConfiguration
 import transfer.domain.Account
 import transfer.domain.Money
 import transfer.domain.TransferService
+import transfer.domain.dto.AccountDto
 import transfer.domain.dto.MoneyDto
 
 class TransferServiceSpec extends Specification {
@@ -20,7 +21,7 @@ class TransferServiceSpec extends Specification {
 
     def "should fail to transfer money to not existing account"() {
         given: "only one account created"
-        Account fromAccount = accountService.createAccount("EUR")
+        AccountDto fromAccount = accountService.createAccount("EUR")
         Integer notExistingAccountNumber = 666
         MoneyDto moneyToTransfer = new MoneyDto(20.0, "EUR")
 
