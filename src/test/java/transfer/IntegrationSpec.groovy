@@ -16,4 +16,11 @@ class IntegrationSpec extends Specification {
     def cleanupSpec() {
         stopServer()
     }
+
+    def getAccountResponse(Integer accountNumber) {
+        return client.get(
+                requestContentType: "application/json",
+                path: "/account/" + accountNumber
+        )
+    }
 }

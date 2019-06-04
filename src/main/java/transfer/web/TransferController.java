@@ -18,6 +18,6 @@ public class TransferController {
 
         transferService.transfer(fromAccountNumber, toAccountNumber, moneyDto);
 
-        ctx.status(201);
+        ctx.status(200);
     };
 }

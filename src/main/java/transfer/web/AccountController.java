@@ -14,22 +14,22 @@ public class AccountController {
 
     public static Handler createAccount = ctx -> {
         String currencyCode = Objects.requireNonNull(ctx.pathParam("code"));
-        accountService.createAccount(currencyCode);
-        ctx.status(201);
+        AccountDto account = accountService.createAccount(currencyCode);
+        ctx.status(201).json(account);
     };
 
     public static Handler depositMoney = ctx -> {
         Integer accountNumber = Integer.parseInt(Objects.requireNonNull(ctx.pathParam("number")));
         MoneyDto moneyDto = ctx.bodyAsClass(MoneyDto.class);
         accountService.deposit(accountNumber, moneyDto);
-        ctx.status(201);
+        ctx.status(200);
     };
 
     public static Handler withdrawMoney = ctx -> {
         Integer accountNumber = Integer.parseInt(Objects.requireNonNull(ctx.pathParam("number")));
         MoneyDto moneyDto = ctx.bodyAsClass(MoneyDto.class);
         accountService.withdraw(accountNumber, moneyDto);
-        ctx.status(201);
+        ctx.status(200);
     };
 
     public static Handler getAccount = ctx -> {
