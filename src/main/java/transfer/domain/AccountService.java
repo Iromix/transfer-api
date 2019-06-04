@@ -15,13 +15,13 @@ public class AccountService {
         return accountRepository.create(currencyCode);
     }
 
-    public void deposit(Integer accountNumber, MoneyDto moneyDto) {
+    public synchronized void deposit(Integer accountNumber, MoneyDto moneyDto) {
         Account account = accountRepository.load(accountNumber);
         account.deposit(new Money(moneyDto.getAmount(), moneyDto.getCurrencyCode()));
         accountRepository.save(account);
     }
 
-    public void withdraw(Integer accountNumber, MoneyDto moneyDto) {
+    public synchronized void withdraw(Integer accountNumber, MoneyDto moneyDto) {
         Account account = accountRepository.load(accountNumber);
         account.withdraw(new Money(moneyDto.getAmount(), moneyDto.getCurrencyCode()));
         accountRepository.save(account);
