@@ -41,13 +41,4 @@ class AccountSpec extends Specification {
         then:
         thrown TransferException
     }
-
-    def "test equals method"() {
-        given:
-        Account account1 = new Account(1, new Money(0.0, PLN))
-        Account account2 = new Account(2, new Money(0.0, PLN))
-
-        expect:
-        account1 != account2
-    }
 }

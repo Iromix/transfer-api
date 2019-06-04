@@ -36,14 +36,14 @@ class ApiSpec extends IntegrationSpec {
         def depositRequestBody = [amount: 10.0, currencyCode: "PLN"]
 
         when: "deposit money on first account"
-        def depositRresponse = client.post(
+        def depositResponse = client.post(
                 requestContentType: "application/json",
                 path: "/account/$fromAccountNumber/deposit",
                 body: depositRequestBody
         )
 
         then: "deposit response is OK"
-        depositRresponse.status == 200
+        depositResponse.status == 200
 
         and: "money for account have been added"
         def accountResponse = getAccountResponse(fromAccountNumber)

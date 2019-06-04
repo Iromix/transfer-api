@@ -1,16 +1,13 @@
 package transfer.domain.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 
-@Data
+@Getter
 @AllArgsConstructor
 public class AccountDto implements Serializable {
     private int accountNumber;
     private MoneyDto moneyDto;
-
-    private AccountDto() {
-    }
 }

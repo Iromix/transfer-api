@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class Money {
 
-    static final Currency DEFAULT_CURRENCY = Currency.getInstance("EUR");
-    static final Money ZERO = new Money(BigDecimal.ZERO);
+    private static final Currency DEFAULT_CURRENCY = Currency.getInstance("EUR");
+    private static final Money ZERO = new Money(BigDecimal.ZERO);
 
     private final BigDecimal value;
 
@@ -72,7 +72,7 @@ public class Money {
     }
 
     private boolean compatibleCurrency(Money money) {
-        return isZero(value) || isZero(money.value) || currencyCode.equals(money.getCurrencyCode());
+        return (isZero(value) && isZero(money.value)) || currencyCode.equals(money.getCurrencyCode());
     }
 
     private boolean incompatibleCurrency(Money money) {

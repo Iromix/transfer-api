@@ -1,16 +1,17 @@
 package transfer.domain.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 
-@Data
+@Getter
 @AllArgsConstructor
 public class MoneyDto implements Serializable {
     private double amount;
     private String currencyCode;
 
     private MoneyDto() {
+        //need for jackson serialization
     }
 }
